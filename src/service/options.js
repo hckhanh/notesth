@@ -8,7 +8,7 @@ export default {
   Pusher: {
     name: 'Pusher',
     options: {
-      cluster: 'ap1',
+      cluster: process.env.REACT_APP_PUSHER_APP_CLUSTER,
       authEndpoint: '/auth/pusher'
     }
   },
@@ -21,4 +21,3 @@ export default {
     }
   }
 }
-
