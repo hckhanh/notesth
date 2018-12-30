@@ -18,7 +18,7 @@ class App extends Component {
     this.switchServiceEvents(this.props.serviceName)
   }
 
-  switchServiceEvents = serviceKey => {
+  switchServiceEvents = (serviceKey) => {
     const { switchService, initNoteEvents } = this.props
     switchService(serviceKey)
     initNoteEvents()
@@ -27,8 +27,8 @@ class App extends Component {
   render() {
     const { serviceName } = this.props
     return (
-      <Layout>
-        <Layout.Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
+      <Layout className="app-layout">
+        <Layout.Header className="app-layout-header">
           <div className="logo" />
           <Menu
             theme="dark"
@@ -43,15 +43,17 @@ class App extends Component {
             <Menu.Item key="PubNub">PubNub</Menu.Item>
           </Menu>
         </Layout.Header>
-        <Layout.Content style={{ padding: '0 50px', marginTop: 64 }}>
+        <Layout.Content className="app-layout-content">
           <Breadcrumb style={{ margin: '16px 0' }}>
             <Breadcrumb.Item>Service</Breadcrumb.Item>
             <Breadcrumb.Item>{serviceName}</Breadcrumb.Item>
           </Breadcrumb>
-          <div style={{ background: '#fff', padding: 24, minHeight: 380 }}>
-            <Connector />
-            <NoteList />
-            <NoteInput />
+          <div className="main-content-layout">
+            <div className="main-content">
+              <Connector />
+              <NoteList />
+              <NoteInput />
+            </div>
           </div>
         </Layout.Content>
         <Layout.Footer style={{ textAlign: 'center' }}>
@@ -70,7 +72,7 @@ class App extends Component {
 }
 
 export default connect(
-  state => ({
+  (state) => ({
     serviceName: getServiceName(state)
   }),
   { switchService, initNoteEvents }
