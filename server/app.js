@@ -6,7 +6,7 @@ const logger = require('morgan')
 const auth = require('./api/auth')
 
 const app = express()
-const buildFolderPath = path.resolve('build')
+const buildFolderPath = path.resolve(__dirname, '../build')
 
 app.use(logger('dev'))
 app.use(express.json())
