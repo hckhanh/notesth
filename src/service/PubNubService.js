@@ -1,5 +1,6 @@
 import { message } from 'antd'
 import PubNub from 'pubnub/lib/web'
+import { bugsnagClient } from '../bugsnag'
 import Service from './Service'
 
 export default class PubNubService extends Service {
@@ -23,6 +24,7 @@ export default class PubNubService extends Service {
           this.connectionEvents[s.category](s)
         } else if (s.error) {
           message.error(`Error: ${s.category}`, 0)
+          bugsnagClient.notify(s, { metaData: { service: { name: 'PubNub' } }})
         }
       }
     })

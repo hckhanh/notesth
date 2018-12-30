@@ -1,5 +1,6 @@
 import * as Ably from 'ably'
 import { message } from 'antd'
+import { bugsnagClient } from '../bugsnag'
 import Service from './Service'
 
 export default class AblyService extends Service {
@@ -21,16 +22,18 @@ export default class AblyService extends Service {
       message.success('Connection is established')
     })
 
-    this.addConnectionEvent('disconnected ', () => {
+    this.addConnectionEvent('disconnected ', ({ reason }) => {
       message.warning('Ably is temporarily disconnected')
+      bugsnagClient.notify(reason, { metaData: { service: { name: 'Ably' } } })
     })
 
-    this.addConnectionEvent('suspended ', () => {
+    this.addConnectionEvent('suspended ', ({ reason }) => {
       message.error('Ably is disconnected!', 0)
+      bugsnagClient.notify(reason, { metaData: { service: { name: 'Ably' } } })
     })
   }
 
-  setChannel = name => {
+  setChannel = (name) => {
     this.channel = this.service.channels.get(name)
   }
 
@@ -51,12 +54,12 @@ export default class AblyService extends Service {
     this.service.connection.off(eventName, callback)
   }
 
-  addChannelSuccessEvent = callback => {
+  addChannelSuccessEvent = (callback) => {
     this.channel.on('attached', callback)
   }
 
-  addChannelErrorEvent = callback => {
-    this.channel.on(['suspended', 'failed'], callback)
+  addChannelErrorEvent = (callback) => {
+    this.channel.on(['suspended', 'failed', 'disconnected'], callback)
   }
 
   publish = (eventName, data, callback) => {

@@ -43,6 +43,7 @@ export default class PusherService extends Service {
         `${error.type} ${error.data.code}: ${error.data.message}`,
         0
       )
+      bugsnagClient.notify(error, { metaData: { service: { name: 'Pusher' } } })
     })
   }
 
