@@ -3,16 +3,19 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import App from './App'
+import ErrorBoundary from './bugsnag'
 import './index.css'
 import * as serviceWorker from './serviceWorker'
 import createConfigStore from './store'
 
 ReactDOM.render(
-  <ConfigProvider>
-    <Provider store={createConfigStore()}>
-      <App />
-    </Provider>
-  </ConfigProvider>,
+  <ErrorBoundary>
+    <ConfigProvider>
+      <Provider store={createConfigStore()}>
+        <App />
+      </Provider>
+    </ConfigProvider>
+  </ErrorBoundary>,
   document.getElementById('root')
 )
 

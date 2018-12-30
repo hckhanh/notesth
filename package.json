@@ -25,6 +25,8 @@
     "not op_mini all"
   ],
   "dependencies": {
+    "@bugsnag/js": "^5.1.0",
+    "@bugsnag/plugin-react": "^5.1.0",
     "@rescripts/cli": "0.0.7",
     "@rescripts/rescript-use-babel-config": "0.0.4",
     "ably": "^1.0.20",
