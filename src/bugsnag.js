@@ -4,6 +4,7 @@ import React from 'react'
 
 export const bugsnagClient = bugsnag({
   apiKey: process.env.REACT_APP_BUGSNAG_API_KEY,
+  appVersion: process.env.REACT_APP_VERSION,
   notifyReleaseStages: ['production']
 })
 bugsnagClient.use(bugsnagReact, React)
