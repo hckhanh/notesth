@@ -1,0 +1,13 @@
+{
+  "execMap": {
+    "js": "node"
+  },
+  "watch": [
+    "server/"
+  ],
+  "env": {
+    "DEBUG": "notesth:*",
+    "PORT": 4000
+  },
+  "ext": "js"
+}
