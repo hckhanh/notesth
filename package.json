@@ -11,7 +11,8 @@
     "build": "rescripts build",
     "test": "rescripts test",
     "eject": "rescripts eject",
-    "server-dev": "nodemon --config nodemon.json server"
+    "server-dev": "nodemon --config nodemon.json server",
+    "heroku-postbuild": "npm run build"
   },
   "proxy": "http://localhost:4000",
   "eslintConfig": {
