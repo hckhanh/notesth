@@ -1,21 +1,11 @@
 import { Button, Form, Input, Tooltip } from 'antd'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { formItemLayout } from '../layout'
 import { initNoteEvents } from '../store/actions/note'
 import { connectChannel, disconnectChannel } from '../store/actions/service'
 import { getChannelLoading } from '../store/selectors/note'
 import { getChannelId, getIsHost } from '../store/selectors/service'
-
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 5 }
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 12 }
-  }
-}
 
 const channelHelpText =
   'Use this id to connect to this session from other devices'

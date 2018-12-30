@@ -5,19 +5,8 @@ import { addNote } from '../store/actions/note'
 import { getAddNoteLoading } from '../store/selectors/note'
 import './EditableNote.css'
 
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 20 }
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 12 }
-  }
-}
-
 class NoteInput extends Component {
-  addNote = e => {
+  addNote = (e) => {
     const value = e.target.value
     if (value) {
       this.props.addNote(e.target.value)
@@ -33,7 +22,7 @@ class NoteInput extends Component {
           validateStatus={this.props.addNoteLoading.get('status')}
         >
           <Input
-            ref={node => (this.note = node)}
+            ref={(node) => (this.note = node)}
             placeholder="Enter some note..."
             onPressEnter={this.addNote}
             readOnly={this.props.addNoteLoading.get('status') === 'validating'}
@@ -46,7 +35,7 @@ class NoteInput extends Component {
 }
 
 export default connect(
-  state => ({
+  (state) => ({
     addNoteLoading: getAddNoteLoading(state)
   }),
   { addNote }

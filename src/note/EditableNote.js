@@ -6,17 +6,6 @@ import { getUpdateLoading } from '../store/selectors/note'
 import DeleteAction from './DelectAction'
 import './EditableNote.css'
 
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 5 }
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 12 }
-  }
-}
-
 class EditableNote extends Component {
   state = {
     editing: false
@@ -40,7 +29,7 @@ class EditableNote extends Component {
     )
   }
 
-  clickOutside = e => {
+  clickOutside = (e) => {
     if (
       this.state.editing &&
       e.target !== this.wrapper.current &&
@@ -120,7 +109,7 @@ class EditableNote extends Component {
 }
 
 export default connect(
-  state => ({
+  (state) => ({
     updateLoading: getUpdateLoading(state)
   }),
   { updateNote }
