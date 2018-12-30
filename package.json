@@ -2,6 +2,9 @@
   "name": "notesth",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "11.x"
+  },
   "scripts": {
     "dev": "concurrently -n server,client \"npm run server-dev\" \"rescripts start\"",
     "start": "node server",
