@@ -1,5 +1,6 @@
 import { message } from 'antd'
 import Pusher from 'pusher-js'
+import { bugsnagClient } from '../bugsnag'
 import Service from './Service'
 
 // Enable pusher logging - don't include this in production
@@ -9,7 +10,7 @@ export default class PusherService extends Service {
   constructor(options) {
     super()
     this.goAround = false
-    this.service = new Pusher('07a7c51bed69074d4f04', options)
+    this.service = new Pusher(process.env.REACT_APP_PUSHER_API_KEY, options)
   }
 
   initConnectionEvents = () => {
