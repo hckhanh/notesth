@@ -85,12 +85,15 @@ class EditableNote extends Component {
       >
         <span ref={this.wrapper}>
           {!this.state.editing ? (
-            <span onClick={this.toggleEdit}>{note.get('content')}</span>
+            <span className="editable-content" onClick={this.toggleEdit}>
+              {note.get('content')}
+            </span>
           ) : (
-            <Form>
+            <Form style={{ width: 462 }}>
               <Form.Item
                 hasFeedback
                 validateStatus={this.props.updateLoading.get('status')}
+                style={{ margin: 0 }}
               >
                 <Input
                   ref={this.input}

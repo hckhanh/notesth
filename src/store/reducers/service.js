@@ -3,7 +3,7 @@ import uuid from 'uuid/v1'
 import { generateId, getDataSource } from '../../utils'
 
 const initState = Map({
-  serviceName: 'PubNub',
+  serviceName: 'Ably',
   channelId: uuid(),
   isHost: true
 })
