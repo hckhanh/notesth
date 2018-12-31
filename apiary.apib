@@ -1,80 +1,53 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: https://notesth.herokuapp.com/
 
 # notesth
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+This document contains the API list for demonstration app for realtime services (Ably, Pusher, PubNub)
 
-## Questions Collection [/questions]
+## Ably Authentication [/auth/ably]
 
-### List All Questions [GET]
+### Get Authentication Data [GET]
+
+When the Ably client connects to server, this api is used for `authUrl`:
+
+```js
+const client = new Ably.Realtime({
+  authUrl: '/auth/ably'
+})
+```
 
 + Response 200 (application/json)
 
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
+        {
+            "keyName": "ZOLpnQ.iYqrTw",
+            "timestamp": 1546268384241,
+            "nonce": "7029813809955550",
+            "mac": "szD/M+iBI2p9JnyDIuGxBxvgTiNjpXiT6Gv1iWJKr+I="
+        }
 
-### Create a New Question [POST]
+## Pusher Authentication [/auth/pusher]
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+### Get Authentication Data [POST]
+
+When the Pusher client connects to server, this api is used for `authEndpoint`:
+
+```js
+const client = new Pusher(({
+  cluster: 'ap1',
+  authEndpoint: '/auth/pusher'
+})
+```
 
 + Request (application/json)
 
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
+            "socket_id": "7034.42624067",
+            "channel_name": "private-c8138850-0d0d-11e9-bde9-29d4cefb6756"
         }
 
-+ Response 201 (application/json)
++ Response 200 (application/json)
 
-    + Headers
-
-            Location: /questions/2
-
-    + Body
-
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
-            }
+        {
+            "auth": "09z0c31hom69074d4f04:3e1c73b18478135a0d0195sdcsd1822997b90724548405669f1cc889077810de"
+        }
