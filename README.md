@@ -1,6 +1,7 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# notesth
+Demonstration app for realtime services (Ably, Pusher, PubNub)
 
-## Available Scripts
+[![Maintainability](https://api.codeclimate.com/v1/badges/5f68b58e186c062c1d92/maintainability)](https://codeclimate.com/github/hckhanh/notesth/maintainability)
 
 In the project directory, you can run:
 
