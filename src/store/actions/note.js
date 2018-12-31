@@ -42,31 +42,16 @@ export function initNoteEvents() {
       dispatch({ type: 'CONNECT_CHANNEL_ERROR' })
     })
 
-    dataSource.subscribe('ADD_NOTE', (note) => {
-      dispatch({
-        type: 'ADD_NOTE',
-        payload: note
+    const noteActions = ['ADD_NOTE', 'DELETE_NOTE', 'UPDATE_NOTE']
+    for (const action of noteActions) {
+      dataSource.subscribe(action, (data) => {
+        dispatch({
+          type: action,
+          payload: data
+        })
+        dispatch({ type: 'SAVE_NOTES' })
+        dispatch({ type: `${action}_SUCCESS` })
       })
-      dispatch({ type: 'SAVE_NOTES' })
-      dispatch({ type: 'ADD_NOTE_SUCCESS' })
-    })
-
-    dataSource.subscribe('DELETE_NOTE', (data) => {
-      dispatch({
-        type: 'DELETE_NOTE',
-        payload: data
-      })
-      dispatch({ type: 'SAVE_NOTES' })
-      dispatch({ type: 'DELETE_NOTE_SUCCESS' })
-    })
-
-    dataSource.subscribe('UPDATE_NOTE', (note) => {
-      dispatch({
-        type: 'UPDATE_NOTE',
-        payload: note
-      })
-      dispatch({ type: 'SAVE_NOTES' })
-      dispatch({ type: 'UPDATE_NOTE_SUCCESS' })
-    })
+    }
   }
 }
