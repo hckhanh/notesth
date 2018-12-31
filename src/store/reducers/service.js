@@ -8,6 +8,14 @@ const initState = Map({
   isHost: true
 })
 
+function switchChannel(dataSource, channelId, state, isHost) {
+  dataSource.unsubscribe()
+  dataSource.setChannel(channelId)
+  return state
+    .update('channelId', () => channelId)
+    .update('isHost', () => isHost)
+}
+
 export default function(state = initState, action) {
   const { payload } = action
   const dataSource = getDataSource()
@@ -27,18 +35,10 @@ export default function(state = initState, action) {
       }
       return state
     case 'CONNECT_CHANNEL':
-      dataSource.unsubscribe()
-      dataSource.setChannel(payload.channelId)
-      return state
-        .update('channelId', () => payload.channelId)
-        .update('isHost', () => false)
+      return switchChannel(dataSource, payload.channelId, state, false)
     case 'DISCONNECT_CHANNEL':
       const newChannelId = generateId()
-      dataSource.unsubscribe()
-      dataSource.setChannel(newChannelId)
-      return state
-        .update('channelId', () => newChannelId)
-        .update('isHost', () => true)
+      return switchChannel(dataSource, newChannelId, state, true)
     default:
       return state
   }

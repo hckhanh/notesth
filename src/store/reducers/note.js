@@ -3,49 +3,54 @@ import { getDataSource, getNotesFromLocalStorage } from '../../utils'
 
 const initState = getNotesFromLocalStorage('notes')
 
-export default function(state = initState, action) {
+function findNote(state, payload, callback) {
+  const noteIndex = state.findIndex((note) => note.get('id') === payload.id)
+  return noteIndex > -1 ? callback(noteIndex) : state
+}
+
+function saveNotesFromChannel(payload) {
+  const { newNotes } = payload
+  localStorage.setItem('notes', JSON.stringify(newNotes))
+  return fromJS(newNotes)
+}
+
+function saveNotesFromLocal(state) {
+  const notesJS = state.toJS()
+  localStorage.setItem('notes', JSON.stringify(notesJS))
+  return state
+}
+
+function broadcastEvent(actionType, dataSource, payload) {
+  const [, eventAction] = actionType.match(/(\w+)_BROADCAST$/)
+  dataSource.publish(eventAction, payload)
+  return eventAction
+}
+
+export default function(state = initState, { type: actionType, payload }) {
   const dataSource = getDataSource()
-  let { type: actionType, payload } = action
 
   if (/_BROADCAST$/.test(actionType)) {
-    const [, eventAction] = actionType.match(/(\w+)_BROADCAST$/)
-    dataSource.publish(eventAction, payload)
+    const eventAction = broadcastEvent(actionType, dataSource, payload)
     if (dataSource.isGoAround()) {
       return state
-    } else {
-      actionType = eventAction
     }
+    actionType = eventAction
   }
 
   switch (actionType) {
     case 'ADD_NOTE':
       return state.push(fromJS(payload))
     case 'DELETE_NOTE':
-      const deletedIndex = state.findIndex(
-        note => note.get('id') === payload.id
-      )
-      if (deletedIndex > -1) {
-        return state.delete(deletedIndex)
-      }
-      return state
+      return findNote(state, payload, (index) => state.delete(index))
     case 'UPDATE_NOTE':
-      const updatedIndex = state.findIndex(
-        note => note.get('id') === payload.id
+      return findNote(state, payload, (index) =>
+        state.updateIn([index, 'content'], () => payload.content)
       )
-      if (updatedIndex > -1) {
-        return state.updateIn([updatedIndex, 'content'], () => payload.content)
-      }
-      return state
     case 'SAVE_NOTES':
       if (payload) {
-        const { newNotes } = payload
-        localStorage.setItem('notes', JSON.stringify(newNotes))
-        return fromJS(newNotes)
-      } else {
-        const notesJS = state.toJS()
-        localStorage.setItem('notes', JSON.stringify(notesJS))
+        return saveNotesFromChannel(payload)
       }
-      return state
+      return saveNotesFromLocal(state)
     default:
       return state
   }
