@@ -39,6 +39,7 @@
     "immutable": "^4.0.0-rc.12",
     "morgan": "^1.9.1",
     "nuclear-js": "^1.4.0",
+    "prop-types": "^15.6.2",
     "pubnub": "^4.21.6",
     "pusher": "^2.2.0",
     "pusher-js": "^4.3.1",
