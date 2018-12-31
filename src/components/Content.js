@@ -1,7 +1,7 @@
 import { Breadcrumb, Layout } from 'antd'
 import * as PropTypes from 'prop-types'
 import React from 'react'
-import Connector from '../App'
+import Connector from '../connector/Connector'
 import NoteInput from '../note/NoteInput'
 import NoteList from '../note/NoteList'
 
@@ -23,4 +23,4 @@ export function Content(props) {
   )
 }
 
-Content.propTypes = { serviceName: PropTypes.string.require }
+Content.propTypes = { serviceName: PropTypes.string.isRequired }

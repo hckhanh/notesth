@@ -1,7 +1,8 @@
-import { Button, Form, Input, Tooltip } from 'antd'
+import { Form } from 'antd'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { formItemLayout } from '../layout'
+import { CurrentChannelInput } from '../components/CurrentChannelInput'
+import { ExternalChannelInput } from '../components/ExternalChannelInput'
 import { initNoteEvents } from '../store/actions/note'
 import { connectChannel, disconnectChannel } from '../store/actions/service'
 import { getChannelLoading } from '../store/selectors/note'
@@ -27,7 +28,7 @@ class Connector extends Component {
     }
   }
 
-  toggleConnectionRealtime = channelId => {
+  toggleConnectionRealtime = (channelId) => {
     if (!this.props.isHost) {
       this.props.disconnectChannel()
       return this.props.initNoteEvents()
@@ -58,20 +59,7 @@ class Connector extends Component {
     this.setState({ mouseHoverButton: false })
   }
 
-  generateConnectButtonText = () => {
-    const status = this.props.channelLoading.get('status')
-    if (!this.props.isHost && status === 'success') {
-      if (this.state.mouseHoverButton) {
-        return 'Disconnect'
-      } else {
-        return 'Connected'
-      }
-    } else {
-      return 'Connect'
-    }
-  }
-
-  generateConnectButtonIcon = () => {
+  getConnectButtonIcon = () => {
     const status = this.props.channelLoading.get('status')
     if (!this.props.isHost && status === 'success') {
       if (this.state.mouseHoverButton) {
@@ -84,69 +72,42 @@ class Connector extends Component {
     }
   }
 
-  clickToCopy = e => {
+  clickToCopy = (e) => {
     e.target.select()
     document.execCommand('copy')
     this.setState({ clickToCopyText: 'Copied to clipboard' })
   }
 
-  resetClickToCopyText = visible => {
+  resetClickToCopyText = (visible) => {
     if (!visible) this.setState({ clickToCopyText: clickCopyText })
   }
 
   render() {
     return (
       <Form>
-        <Form.Item
-          {...formItemLayout}
-          label="Current Channel"
+        <CurrentChannelInput
           help={this.state.channelHelpText}
-        >
-          <Tooltip
-            title={this.state.clickToCopyText}
-            onVisibleChange={this.resetClickToCopyText}
-          >
-            <Input
-              readOnly
-              value={this.props.channelId}
-              onClick={this.clickToCopy}
-              id="currentChannel"
-            />
-          </Tooltip>
-        </Form.Item>
+          title={this.state.clickToCopyText}
+          onVisibleChange={this.resetClickToCopyText}
+          value={this.props.channelId}
+          onClick={this.clickToCopy}
+        />
 
-        <Form.Item
-          {...formItemLayout}
-          label="External Channel"
-          hasFeedback
-          validateStatus={this.state.channelField.status}
-          help={this.state.channelField.error}
-        >
-          <Input.Search
-            placeholder="Enter channel id from other device to connect"
-            onSearch={this.toggleConnectionRealtime}
-            enterButton={
-              <Button
-                htmlType="button"
-                icon={this.generateConnectButtonIcon()}
-                loading={
-                  this.props.channelLoading.get('status') === 'validating'
-                }
-                onMouseEnter={this.mouseEnterButton}
-                onMouseLeave={this.mouseLeaveButton}
-              >
-                {this.generateConnectButtonText()}
-              </Button>
-            }
-          />
-        </Form.Item>
+        <ExternalChannelInput
+          channelField={this.state.channelField}
+          onSearch={this.toggleConnectionRealtime}
+          icon={this.getConnectButtonIcon()}
+          channelLoading={this.props.channelLoading}
+          onMouseEnter={this.mouseEnterButton}
+          onMouseLeave={this.mouseLeaveButton}
+        />
       </Form>
     )
   }
 }
 
 export default connect(
-  state => ({
+  (state) => ({
     channelId: getChannelId(state),
     channelLoading: getChannelLoading(state),
     isHost: getIsHost(state)
