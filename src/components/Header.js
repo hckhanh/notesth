@@ -31,6 +31,6 @@ export function Header(props) {
 }
 
 Header.propTypes = {
-  onSelect: PropTypes.func.require,
-  serviceName: PropTypes.string.require
+  onSelect: PropTypes.func.isRequired,
+  serviceName: PropTypes.string.isRequired
 }
