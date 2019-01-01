@@ -26,17 +26,7 @@ function broadcastEvent(actionType, dataSource, payload) {
   return eventAction
 }
 
-export default function(state = initState, { type: actionType, payload }) {
-  const dataSource = getDataSource()
-
-  if (/_BROADCAST$/.test(actionType)) {
-    const eventAction = broadcastEvent(actionType, dataSource, payload)
-    if (dataSource.isGoAround()) {
-      return state
-    }
-    actionType = eventAction
-  }
-
+function reduceLocalActions(state, actionType, payload) {
   switch (actionType) {
     case 'ADD_NOTE':
       return state.push(fromJS(payload))
@@ -54,4 +44,18 @@ export default function(state = initState, { type: actionType, payload }) {
     default:
       return state
   }
+}
+
+export default function(state = initState, { type: actionType, payload }) {
+  const dataSource = getDataSource()
+
+  if (/_BROADCAST$/.test(actionType)) {
+    const eventAction = broadcastEvent(actionType, dataSource, payload)
+    if (dataSource.isGoAround()) {
+      return state
+    }
+    actionType = eventAction
+  }
+
+  return reduceLocalActions(state, actionType, payload)
 }
