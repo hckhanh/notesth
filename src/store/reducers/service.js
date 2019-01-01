@@ -16,24 +16,28 @@ function switchChannel(dataSource, channelId, state, isHost) {
     .update('isHost', () => isHost)
 }
 
+function switchService(payload, state) {
+  const { serviceName } = payload
+  if (serviceName) {
+    const oldDataSource = getDataSource()
+    if (oldDataSource) {
+      oldDataSource.disconnect()
+    }
+    const dataSource = getDataSource(serviceName)
+    dataSource.setChannel(state.get('channelId'))
+    dataSource.initConnectionEvents()
+    return state.update('serviceName', () => serviceName)
+  }
+  return state
+}
+
 export default function(state = initState, action) {
   const { payload } = action
   const dataSource = getDataSource()
 
   switch (action.type) {
     case 'SWITCH_SERVICE':
-      const { serviceName } = payload
-      if (serviceName) {
-        const oldDataSource = getDataSource()
-        if (oldDataSource) {
-          oldDataSource.disconnect()
-        }
-        const dataSource = getDataSource(serviceName)
-        dataSource.setChannel(state.get('channelId'))
-        dataSource.initConnectionEvents()
-        return state.update('serviceName', () => serviceName)
-      }
-      return state
+      return switchService(payload, state)
     case 'CONNECT_CHANNEL':
       return switchChannel(dataSource, payload.channelId, state, false)
     case 'DISCONNECT_CHANNEL':
