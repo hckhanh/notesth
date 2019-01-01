@@ -1,10 +1,48 @@
 import { Form, Input, List } from 'antd'
-import React, { Component } from 'react'
+import * as PropTypes from 'prop-types'
+import React, { Component, forwardRef } from 'react'
 import { connect } from 'react-redux'
 import { updateNote } from '../store/actions/note'
 import { getUpdateLoading } from '../store/selectors/note'
 import DeleteAction from './DelectAction'
 import './EditableNote.css'
+
+function TextContent(props) {
+  return (
+    <span className="editable-content" onClick={props.onClick}>
+      {props.note.get('content')}
+    </span>
+  )
+}
+
+TextContent.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  note: PropTypes.object.isRequired
+}
+
+const ContentInput = forwardRef((props, ref) => (
+  <Form style={{ width: 462 }}>
+    <Form.Item
+      hasFeedback
+      validateStatus={props.updateLoading.get('status')}
+      style={{ margin: 0 }}
+    >
+      <Input
+        ref={ref}
+        placeholder="Enter external id to connect"
+        defaultValue={props.note.get('content')}
+        onPressEnter={props.onPressEnter}
+        id="noteEditorContent"
+      />
+    </Form.Item>
+  </Form>
+))
+
+ContentInput.propTypes = {
+  updateLoading: PropTypes.object.isRequired,
+  note: PropTypes.object.isRequired,
+  onPressEnter: PropTypes.func.isRequired
+}
 
 class EditableNote extends Component {
   state = {
@@ -85,25 +123,14 @@ class EditableNote extends Component {
       >
         <span ref={this.wrapper}>
           {!this.state.editing ? (
-            <span className="editable-content" onClick={this.toggleEdit}>
-              {note.get('content')}
-            </span>
+            <TextContent onClick={this.toggleEdit} note={note} />
           ) : (
-            <Form style={{ width: 462 }}>
-              <Form.Item
-                hasFeedback
-                validateStatus={this.props.updateLoading.get('status')}
-                style={{ margin: 0 }}
-              >
-                <Input
-                  ref={this.input}
-                  placeholder="Enter external id to connect"
-                  defaultValue={note.get('content')}
-                  onPressEnter={this.saveNote}
-                  id="noteEditorContent"
-                />
-              </Form.Item>
-            </Form>
+            <ContentInput
+              updateLoading={this.props.updateLoading}
+              ref={this.input}
+              note={note}
+              onPressEnter={this.saveNote}
+            />
           )}
         </span>
       </List.Item>
