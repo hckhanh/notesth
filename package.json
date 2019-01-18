@@ -30,7 +30,7 @@
     "@rescripts/cli": "0.0.7",
     "@rescripts/rescript-use-babel-config": "0.0.4",
     "ably": "^1.0.21",
-    "antd": "^3.12.2",
+    "antd": "^3.12.3",
     "babel-plugin-import": "^1.11.0",
     "cookie-parser": "^1.4.3",
     "debug": "^4.1.1",
