@@ -1,5 +1,8 @@
 const CracoLessPlugin = require('craco-less')
-const { BugsnagBuildReporterPlugin } = require('webpack-bugsnag-plugins')
+const {
+  BugsnagBuildReporterPlugin,
+  BugsnagSourceMapUploaderPlugin
+} = require('webpack-bugsnag-plugins')
 
 const webpackConfigs = {
   babel: {
@@ -23,17 +26,17 @@ const webpackConfigs = {
   ]
 }
 
-if (webpackConfigs.plugins && process.env.NODE_ENV === 'production') {
-  webpackConfigs.plugins.push(
-    new BugsnagBuildReporterPlugin(
-      {
-        apiKey: process.env.REACT_APP_BUGSNAG_API_KEY,
-        appVersion: process.env.REACT_APP_VERSION
-      },
-      {
-        /* opts */
-      }
-    )
+if (process.env.NODE_ENV === 'production') {
+  webpackConfigs.plugins.concat(
+    new BugsnagBuildReporterPlugin({
+      apiKey: process.env.REACT_APP_BUGSNAG_API_KEY,
+      appVersion: process.env.REACT_APP_VERSION,
+      releaseStage: 'production'
+    }),
+    new BugsnagSourceMapUploaderPlugin({
+      apiKey: process.env.REACT_APP_BUGSNAG_API_KEY,
+      appVersion: process.env.REACT_APP_VERSION
+    })
   )
 }
 
