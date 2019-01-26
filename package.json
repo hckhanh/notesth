@@ -6,11 +6,11 @@
     "node": "11.x"
   },
   "scripts": {
-    "dev": "concurrently -n server,client \"npm run server-dev\" \"rescripts start\"",
+    "dev": "concurrently -n server,client \"npm run server-dev\" \"craco start\"",
     "start": "node server",
-    "build": "rescripts build",
-    "test": "rescripts test",
-    "eject": "rescripts eject",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject",
     "server-dev": "nodemon --config nodemon.json server",
     "heroku-postbuild": "npm run build"
   },
@@ -25,14 +25,14 @@
     "not op_mini all"
   ],
   "dependencies": {
-    "@bugsnag/js": "^5.1.0",
-    "@bugsnag/plugin-react": "^5.1.0",
-    "@rescripts/cli": "0.0.7",
-    "@rescripts/rescript-use-babel-config": "0.0.4",
-    "ably": "^1.0.21",
-    "antd": "^3.12.3",
+    "@bugsnag/js": "^5.2.0",
+    "@bugsnag/plugin-react": "^5.2.0",
+    "@craco/craco": "^3.4.0",
+    "ably": "^1.0.23",
+    "antd": "^3.12.4",
     "babel-plugin-import": "^1.11.0",
     "cookie-parser": "^1.4.3",
+    "craco-less": "^1.6.0",
     "debug": "^4.1.1",
     "express": "^4.16.4",
     "http-errors": "^1.7.1",
