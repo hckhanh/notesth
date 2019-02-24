@@ -7,41 +7,43 @@ import { getUpdateLoading } from '../store/selectors/note'
 import DeleteAction from './DelectAction'
 import './EditableNote.css'
 
-function TextContent(props) {
+function TextContent({ note, onClick }) {
   return (
-    <span className="editable-content" onClick={props.onClick}>
-      {props.note.get('content')}
+    <span className="editable-content" onClick={onClick}>
+      {note.get('content')}
     </span>
   )
 }
 
 TextContent.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   note: PropTypes.object.isRequired
 }
 
-const ContentInput = forwardRef((props, ref) => (
-  <Form style={{ width: 462 }}>
-    <Form.Item
-      hasFeedback
-      validateStatus={props.updateLoading.get('status')}
-      style={{ margin: 0 }}
-    >
-      <Input
-        ref={ref}
-        placeholder="Enter external id to connect"
-        defaultValue={props.note.get('content')}
-        onPressEnter={props.onPressEnter}
-        id="noteEditorContent"
-      />
-    </Form.Item>
-  </Form>
-))
+const ContentInput = forwardRef(
+  ({ updateLoading, note, onPressEnter }, ref) => (
+    <Form style={{ width: 462 }}>
+      <Form.Item
+        hasFeedback={updateLoading.get('status') !== 'success'}
+        validateStatus={updateLoading.get('status')}
+        style={{ margin: 0 }}
+      >
+        <Input
+          ref={ref}
+          id="noteEditorContent"
+          defaultValue={note.get('content')}
+          placeholder="Enter external id to connect"
+          onPressEnter={onPressEnter}
+        />
+      </Form.Item>
+    </Form>
+  )
+)
 
 ContentInput.propTypes = {
   updateLoading: PropTypes.object.isRequired,
   note: PropTypes.object.isRequired,
-  onPressEnter: PropTypes.func.isRequired
+  onPressEnter: PropTypes.func
 }
 
 class EditableNote extends Component {
@@ -139,8 +141,6 @@ class EditableNote extends Component {
 }
 
 export default connect(
-  (state) => ({
-    updateLoading: getUpdateLoading(state)
-  }),
+  (state) => ({ updateLoading: getUpdateLoading(state) }),
   { updateNote }
 )(EditableNote)
