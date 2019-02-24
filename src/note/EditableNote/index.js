@@ -5,20 +5,8 @@ import { connect } from 'react-redux'
 import { updateNote } from '../../store/actions/note'
 import { getUpdateLoading } from '../../store/selectors/note'
 import DeleteAction from '../DelectAction'
+import TextContent from '../TextContent'
 import './style.css'
-
-function TextContent({ note, onClick }) {
-  return (
-    <span className="editable-content" onClick={onClick}>
-      {note.get('content')}
-    </span>
-  )
-}
-
-TextContent.propTypes = {
-  onClick: PropTypes.func,
-  note: PropTypes.object.isRequired
-}
 
 const ContentInput = forwardRef(
   ({ updateLoading, note, onPressEnter }, ref) => (
