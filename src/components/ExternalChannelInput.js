@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types'
 import React from 'react'
 import { formItemLayout } from '../layout'
 
-export function ExternalChannelInput(props) {
+export default function ExternalChannelInput(props) {
   return (
     <Form.Item
       {...formItemLayout}

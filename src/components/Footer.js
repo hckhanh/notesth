@@ -1,7 +1,7 @@
 import { Layout } from 'antd'
 import React from 'react'
 
-export function Footer() {
+export default function Footer() {
   return (
     <Layout.Footer style={{ textAlign: 'center' }}>
       NoteSth ©2018 Created by{' '}

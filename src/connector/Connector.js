@@ -1,8 +1,8 @@
 import { Form } from 'antd'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { CurrentChannelInput } from '../components/CurrentChannelInput'
-import { ExternalChannelInput } from '../components/ExternalChannelInput'
+import CurrentChannelInput from '../components/CurrentChannelInput'
+import ExternalChannelInput from '../components/ExternalChannelInput'
 import { initNoteEvents } from '../store/actions/note'
 import { connectChannel, disconnectChannel } from '../store/actions/service'
 import { getChannelLoading } from '../store/selectors/note'
@@ -112,9 +112,5 @@ export default connect(
     channelLoading: getChannelLoading(state),
     isHost: getIsHost(state)
   }),
-  {
-    connectChannel,
-    initNoteEvents,
-    disconnectChannel
-  }
+  { connectChannel, initNoteEvents, disconnectChannel }
 )(Connector)

@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types'
 import React from 'react'
 import { formItemLayout } from '../layout'
 
-export function CurrentChannelInput(props) {
+export default function CurrentChannelInput(props) {
   return (
     <Form.Item {...formItemLayout} label="Current Channel" help={props.help}>
       <Tooltip title={props.title} onVisibleChange={props.onVisibleChange}>

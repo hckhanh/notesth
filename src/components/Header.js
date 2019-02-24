@@ -2,7 +2,7 @@ import { Layout, Menu } from 'antd'
 import * as PropTypes from 'prop-types'
 import React from 'react'
 
-export function Header(props) {
+export default function Header({ serviceName, onSelect }) {
   return (
     <Layout.Header className="app-layout-header">
       <div className="logo" />
@@ -19,8 +19,8 @@ export function Header(props) {
         mode="horizontal"
         defaultSelectedKeys={['2']}
         style={{ lineHeight: '64px' }}
-        onSelect={props.onSelect}
-        selectedKeys={[props.serviceName]}
+        onSelect={onSelect}
+        selectedKeys={[serviceName]}
       >
         <Menu.Item key="Ably">Ably</Menu.Item>
         <Menu.Item key="Pusher">Pusher</Menu.Item>
@@ -31,6 +31,6 @@ export function Header(props) {
 }
 
 Header.propTypes = {
-  onSelect: PropTypes.func.isRequired,
-  serviceName: PropTypes.string.isRequired
+  serviceName: PropTypes.string.isRequired,
+  onSelect: PropTypes.func.isRequired
 }
