@@ -15,7 +15,7 @@ export default class Service {
     callNotImplemented()
   }
 
-  setChannel = name => {
+  setChannel = (name) => {
     callNotImplemented()
   }
 

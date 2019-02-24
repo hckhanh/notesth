@@ -24,7 +24,7 @@ export default class PubNubService extends Service {
           this.connectionEvents[s.category](s)
         } else if (s.error) {
           message.error(`Error: ${s.category}`, 0)
-          bugsnagClient.notify(s, { metaData: { service: { name: 'PubNub' } }})
+          bugsnagClient.notify(s, { metaData: { service: { name: 'PubNub' } } })
         }
       }
     })
@@ -65,21 +65,16 @@ export default class PubNubService extends Service {
     this.addConnectionEvent('PNConnectedCategory', callback)
   }
 
-  addChannelErrorEvent = (callback) => {
-  }
+  addChannelErrorEvent = (callback) => {}
 
   publish = (eventName, data) => {
-    this.service.publish({
-        message: {
-          eventName,
-          data
-        },
-        channel: this.channelName
-      },
+    this.service.publish(
+      { message: { eventName, data }, channel: this.channelName },
       function(status, response) {
         // handle status, response
         console.log(status, response)
-      })
+      }
+    )
   }
 
   disconnect = () => {

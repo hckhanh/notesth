@@ -34,7 +34,7 @@ export default class PusherService extends Service {
       message.warning('Channels is not supported')
     })
 
-    this.addConnectionEvent('connecting_in ', delay => {
+    this.addConnectionEvent('connecting_in ', (delay) => {
       message.info(`Pusher will re-connect in ${delay} seconds`)
     })
 
@@ -47,7 +47,7 @@ export default class PusherService extends Service {
     })
   }
 
-  setChannel = name => {
+  setChannel = (name) => {
     this.channelName = `private-${name}`
     this.channel = this.service.subscribe(this.channelName)
   }
@@ -68,11 +68,11 @@ export default class PusherService extends Service {
     this.service.connection.unbind(eventName, callback)
   }
 
-  addChannelSuccessEvent = callback => {
+  addChannelSuccessEvent = (callback) => {
     this.channel.bind('pusher:subscription_succeeded', callback)
   }
 
-  addChannelErrorEvent = callback => {
+  addChannelErrorEvent = (callback) => {
     this.channel.bind('pusher:subscription_error', callback)
   }
 
