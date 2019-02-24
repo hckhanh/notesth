@@ -37,6 +37,8 @@
     "express": "^4.16.4",
     "http-errors": "^1.7.2",
     "immutable": "^4.0.0-rc.12",
+    "logrocket": "^0.6.19",
+    "logrocket-react": "^3.0.0",
     "morgan": "^1.9.1",
     "nuclear-js": "^1.4.0",
     "prop-types": "^15.6.2",
