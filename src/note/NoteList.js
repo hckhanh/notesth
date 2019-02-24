@@ -15,11 +15,11 @@ function NoteList({ notes }) {
       }
       bordered
       dataSource={notes}
-      renderItem={note => <EditableNote note={note} />}
+      renderItem={(note) => <EditableNote note={note} />}
     />
   )
 }
 
-export default connect(state => ({
-  notes: getNotes(state)
-}))(NoteList)
+export default connect((state) => ({ notes: getNotes(state) }))(
+  React.memo(NoteList)
+)
