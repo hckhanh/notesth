@@ -10,11 +10,13 @@ import * as serviceWorker from './serviceWorker'
 import createConfigStore from './store'
 
 if (process.env.NODE_ENV === 'production') {
-  LogRocket.init(process.env.REACT_APP_LOGROCKET_APP_ID);
+  LogRocket.init(process.env.REACT_APP_LOGROCKET_APP_ID, {
+    release: process.env.REACT_APP_VERSION
+  })
 }
 
 // setup LogRocket
-setupLogRocketReact(LogRocket);
+setupLogRocketReact(LogRocket)
 
 ReactDOM.render(
   <ErrorBoundary>
