@@ -1,5 +1,5 @@
 import { Layout } from 'antd'
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import './App.css'
 import Content from './components/Content'
@@ -9,36 +9,29 @@ import { initNoteEvents } from './store/actions/note'
 import { switchService } from './store/actions/service'
 import { getServiceName } from './store/selectors/service'
 
-class App extends Component {
-  switchServiceKey = ({ key }) => {
-    this.switchServiceEvents(key)
-  }
-
-  componentDidMount() {
-    this.switchServiceEvents(this.props.serviceName)
-  }
-
-  switchServiceEvents = (serviceKey) => {
-    const { switchService, initNoteEvents } = this.props
+function App({ serviceName, switchService, initNoteEvents }) {
+  const switchServiceEvents = (serviceKey) => {
     switchService(serviceKey)
     initNoteEvents()
   }
 
-  render() {
-    const { serviceName } = this.props
-    return (
-      <Layout className="app-layout">
-        <Header onSelect={this.switchServiceKey} serviceName={serviceName} />
-        <Content serviceName={serviceName} />
-        <Footer />
-      </Layout>
-    )
-  }
+  useEffect(() => {
+    switchServiceEvents(serviceName)
+  }, [])
+
+  return (
+    <Layout className="app-layout">
+      <Header
+        serviceName={serviceName}
+        onSelect={({ key }) => switchServiceEvents(key)}
+      />
+      <Content serviceName={serviceName} />
+      <Footer />
+    </Layout>
+  )
 }
 
 export default connect(
-  (state) => ({
-    serviceName: getServiceName(state)
-  }),
+  (state) => ({ serviceName: getServiceName(state) }),
   { switchService, initNoteEvents }
 )(App)
