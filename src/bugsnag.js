@@ -1,11 +1,17 @@
 import bugsnag from '@bugsnag/js'
 import bugsnagReact from '@bugsnag/plugin-react'
+import LogRocket from 'logrocket'
 import React from 'react'
 
 export const bugsnagClient = bugsnag({
   apiKey: process.env.REACT_APP_BUGSNAG_API_KEY,
   appVersion: process.env.REACT_APP_VERSION,
-  notifyReleaseStages: ['production']
+  notifyReleaseStages: ['production'],
+  beforeSend: function(report) {
+    report.updateMetaData('LogRocket', {
+      sessionURL: LogRocket.sessionURL
+    })
+  }
 })
 bugsnagClient.use(bugsnagReact, React)
 
