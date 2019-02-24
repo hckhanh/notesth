@@ -1,6 +1,6 @@
 {
   "name": "notesth",
-  "version": "0.4.2",
+  "version": "1.0.0",
   "private": true,
   "engines": {
     "node": "11.x"
@@ -25,8 +25,8 @@
     "not op_mini all"
   ],
   "dependencies": {
-    "@bugsnag/js": "^5.2.0",
-    "@bugsnag/plugin-react": "^5.2.0",
+    "@bugsnag/js": "^6.0.0",
+    "@bugsnag/plugin-react": "^6.0.0",
     "@craco/craco": "^3.4.1",
     "ably": "^1.0.23",
     "antd": "^3.13.6",
@@ -37,6 +37,8 @@
     "express": "^4.16.4",
     "http-errors": "^1.7.2",
     "immutable": "^4.0.0-rc.12",
+    "logrocket": "^0.6.19",
+    "logrocket-react": "^3.0.0",
     "morgan": "^1.9.1",
     "nuclear-js": "^1.4.0",
     "prop-types": "^15.6.2",
