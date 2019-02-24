@@ -6,10 +6,18 @@
   background: rgba(255, 255, 255, 0.2);
 }
 
-.app-version {
+.right-layout {
   float: right;
-  margin-right: 24px;
   color: rgba(255, 255, 255, 0.65);
+  height: 100%;
+}
+
+#changelog {
+  display: inline-flex;
+}
+
+#HW_badge_cont {
+  top: 4px;
 }
 
 .app-layout {

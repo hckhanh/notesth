@@ -6,14 +6,16 @@ export default function Header({ serviceName, onSelect }) {
   return (
     <Layout.Header className="app-layout-header">
       <div className="logo" />
-      <a
-        className="app-version"
-        href="https://github.com/hckhanh/notesth"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        v{process.env.REACT_APP_VERSION}
-      </a>
+      <div className="right-layout">
+        <a
+          href="https://github.com/hckhanh/notesth"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          v{process.env.REACT_APP_VERSION}
+        </a>
+        <div id="changelog" />
+      </div>
       <Menu
         theme="dark"
         mode="horizontal"
