@@ -3,7 +3,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { addNote } from '../store/actions/note'
 import { getAddNoteLoading } from '../store/selectors/note'
-import './EditableNote.css'
 
 function NoteInput({ addNote, addNoteLoading }) {
   const handleAddNote = (e) => {
