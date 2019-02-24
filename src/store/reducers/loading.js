@@ -8,7 +8,11 @@ export default function(state = initState, action) {
     const [, requestName, status] = matches
     return state.set(
       requestName,
-      fromJS({ status: status.toLowerCase(), payload: action.payload })
+      fromJS({
+        status: status.toLowerCase(),
+        payload: action.payload,
+        loading: status === 'VALIDATING'
+      })
     )
   } else {
     return state
