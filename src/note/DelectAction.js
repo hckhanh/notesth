@@ -1,5 +1,5 @@
 import { Button, Popconfirm } from 'antd'
-import React from 'react'
+import React, { memo } from 'react'
 import { connect } from 'react-redux'
 import { deleteNote } from '../store/actions/note'
 import { getDeleteNoteLoading } from '../store/selectors/note'
@@ -25,8 +25,6 @@ function DeleteAction({ deleteNote, noteId, deleteNoteLoading }) {
 }
 
 export default connect(
-  state => ({
-    deleteNoteLoading: getDeleteNoteLoading(state)
-  }),
+  (state) => ({ deleteNoteLoading: getDeleteNoteLoading(state) }),
   { deleteNote }
-)(DeleteAction)
+)(memo(DeleteAction))
