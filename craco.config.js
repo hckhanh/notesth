@@ -17,7 +17,7 @@ const webpackConfigs = {
       options: {
         lessLoaderOptions: {
           modifyVars: {
-            '@primary-color': '#ffb151'
+            // '@primary-color': '#ffb151'
           },
           javascriptEnabled: true
         }
