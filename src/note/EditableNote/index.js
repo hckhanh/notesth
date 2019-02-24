@@ -2,10 +2,10 @@ import { Form, Input, List } from 'antd'
 import * as PropTypes from 'prop-types'
 import React, { Component, forwardRef } from 'react'
 import { connect } from 'react-redux'
-import { updateNote } from '../store/actions/note'
-import { getUpdateLoading } from '../store/selectors/note'
-import DeleteAction from './DelectAction'
-import './EditableNote.css'
+import { updateNote } from '../../store/actions/note'
+import { getUpdateLoading } from '../../store/selectors/note'
+import DeleteAction from '../DelectAction'
+import './style.css'
 
 function TextContent({ note, onClick }) {
   return (
