@@ -28,15 +28,21 @@ const webpackConfigs = {
 
 if (process.env.NODE_ENV === 'production') {
   webpackConfigs.plugins = webpackConfigs.plugins.concat(
-    new BugsnagBuildReporterPlugin({
-      apiKey: process.env.REACT_APP_BUGSNAG_API_KEY,
-      appVersion: process.env.REACT_APP_VERSION,
-      releaseStage: 'production'
-    }),
-    new BugsnagSourceMapUploaderPlugin({
-      apiKey: process.env.REACT_APP_BUGSNAG_API_KEY,
-      appVersion: process.env.REACT_APP_VERSION
-    })
+    {
+      plugin: BugsnagBuildReporterPlugin,
+      options: {
+        apiKey: process.env.REACT_APP_BUGSNAG_API_KEY,
+        appVersion: process.env.REACT_APP_VERSION,
+        releaseStage: 'production'
+      }
+    },
+    {
+      plugin: BugsnagSourceMapUploaderPlugin,
+      options: {
+        apiKey: process.env.REACT_APP_BUGSNAG_API_KEY,
+        appVersion: process.env.REACT_APP_VERSION
+      }
+    }
   )
 }
 
