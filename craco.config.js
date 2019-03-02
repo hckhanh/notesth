@@ -27,7 +27,7 @@ const webpackConfigs = {
 }
 
 if (process.env.NODE_ENV === 'production') {
-  webpackConfigs.plugins.concat(
+  webpackConfigs.plugins = webpackConfigs.plugins.concat(
     new BugsnagBuildReporterPlugin({
       apiKey: process.env.REACT_APP_BUGSNAG_API_KEY,
       appVersion: process.env.REACT_APP_VERSION,
