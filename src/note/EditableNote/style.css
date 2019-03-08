@@ -9,3 +9,7 @@
   padding: 5px 12px;
   cursor: pointer;
 }
+
+.editable-note {
+  justify-content: space-between;
+}
