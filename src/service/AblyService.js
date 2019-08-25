@@ -9,7 +9,7 @@ export default class AblyService extends Service {
     this.service = new Ably.Realtime(options)
   }
 
-  initConnectionEvents = () => {
+  initConnectionEvents() {
     let connectingMessage
 
     this.addConnectionEvent('connecting', () => {
@@ -33,40 +33,40 @@ export default class AblyService extends Service {
     })
   }
 
-  setChannel = (name) => {
+  setChannel(name) {
     this.channel = this.service.channels.get(name)
   }
 
-  subscribe = (eventName, callback) => {
+  subscribe(eventName, callback) {
     this.channel.subscribe(eventName, ({ data }) => callback(data))
   }
 
-  unsubscribe = () => {
+  unsubscribe() {
     this.channel.off()
     this.channel.unsubscribe()
   }
 
-  addConnectionEvent = (eventName, callback) => {
+  addConnectionEvent(eventName, callback) {
     this.service.connection.on(eventName, callback)
   }
 
-  removeConnectionEvent = (eventName, callback) => {
+  removeConnectionEvent(eventName, callback) {
     this.service.connection.off(eventName, callback)
   }
 
-  addChannelSuccessEvent = (callback) => {
+  addChannelSuccessEvent(callback) {
     this.channel.on('attached', callback)
   }
 
-  addChannelErrorEvent = (callback) => {
+  addChannelErrorEvent(callback) {
     this.channel.on(['suspended', 'failed', 'disconnected'], callback)
   }
 
-  publish = (eventName, data, callback) => {
+  publish(eventName, data, callback) {
     this.channel.publish(eventName, data, callback)
   }
 
-  disconnect = () => {
+  disconnect() {
     this.service.close()
   }
 }
