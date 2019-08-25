@@ -11,16 +11,23 @@ export default class PubNubService extends Service {
     this.connectionEvents = {}
   }
 
-  initConnectionEvents = () => {
+  initConnectionEvents() {
     this.service.addListener({
       message: (m) => {
         const { eventName, data } = m.message
-        if (this.channelEvents.hasOwnProperty(eventName)) {
+        if (
+          Object.prototype.hasOwnProperty.call(this.channelEvents, eventName)
+        ) {
           this.channelEvents[eventName](data)
         }
       },
       status: (s) => {
-        if (this.connectionEvents.hasOwnProperty(s.category)) {
+        if (
+          Object.prototype.hasOwnProperty.call(
+            this.connectionEvents,
+            s.category
+          )
+        ) {
           this.connectionEvents[s.category](s)
         } else if (s.error) {
           message.error(`Error: ${s.category}`, 0)
@@ -40,34 +47,34 @@ export default class PubNubService extends Service {
     message.success('Connection is established')
   }
 
-  setChannel = (name) => {
+  setChannel(name) {
     this.channelName = name
     this.service.subscribe({ channels: [name] })
   }
 
-  subscribe = (eventName, callback) => {
+  subscribe(eventName, callback) {
     this.channelEvents[eventName] = callback
   }
 
-  unsubscribe = () => {
+  unsubscribe() {
     this.service.unsubscribe({ channels: [this.channelName] })
   }
 
-  addConnectionEvent = (eventName, callback) => {
+  addConnectionEvent(eventName, callback) {
     this.connectionEvents[eventName] = callback
   }
 
-  removeConnectionEvent = (eventName, callback) => {
+  removeConnectionEvent(eventName, callback) {
     delete this.connectionEvents[eventName]
   }
 
-  addChannelSuccessEvent = (callback) => {
+  addChannelSuccessEvent(callback) {
     this.addConnectionEvent('PNConnectedCategory', callback)
   }
 
-  addChannelErrorEvent = (callback) => {}
+  addChannelErrorEvent(callback) {}
 
-  publish = (eventName, data) => {
+  publish(eventName, data) {
     this.service.publish(
       { message: { eventName, data }, channel: this.channelName },
       function(status, response) {
@@ -77,7 +84,7 @@ export default class PubNubService extends Service {
     )
   }
 
-  disconnect = () => {
+  disconnect() {
     this.service.disconnect()
   }
 }

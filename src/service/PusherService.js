@@ -13,7 +13,7 @@ export default class PusherService extends Service {
     this.service = new Pusher(process.env.REACT_APP_PUSHER_API_KEY, options)
   }
 
-  initConnectionEvents = () => {
+  initConnectionEvents() {
     let connectingMessage
 
     this.addConnectionEvent('connecting', () => {
@@ -47,40 +47,40 @@ export default class PusherService extends Service {
     })
   }
 
-  setChannel = (name) => {
+  setChannel(name) {
     this.channelName = `private-${name}`
     this.channel = this.service.subscribe(this.channelName)
   }
 
-  subscribe = (eventName, callback) => {
+  subscribe(eventName, callback) {
     this.channel.bind(`client-${eventName}`, callback)
   }
 
-  unsubscribe = () => {
+  unsubscribe() {
     this.service.unsubscribe(this.channelName)
   }
 
-  addConnectionEvent = (eventName, callback) => {
+  addConnectionEvent(eventName, callback) {
     this.service.connection.bind(eventName, callback)
   }
 
-  removeConnectionEvent = (eventName, callback) => {
+  removeConnectionEvent(eventName, callback) {
     this.service.connection.unbind(eventName, callback)
   }
 
-  addChannelSuccessEvent = (callback) => {
+  addChannelSuccessEvent(callback) {
     this.channel.bind('pusher:subscription_succeeded', callback)
   }
 
-  addChannelErrorEvent = (callback) => {
+  addChannelErrorEvent(callback) {
     this.channel.bind('pusher:subscription_error', callback)
   }
 
-  publish = (eventName, data) => {
+  publish(eventName, data) {
     this.channel.trigger(`client-${eventName}`, data)
   }
 
-  disconnect = () => {
+  disconnect() {
     this.service.disconnect()
   }
 }

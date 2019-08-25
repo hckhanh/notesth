@@ -1,7 +1,7 @@
 import services from '../../service/options'
 
 export function switchService(serviceKey) {
-  if (services.hasOwnProperty(serviceKey)) {
+  if (Object.prototype.hasOwnProperty.call(services, serviceKey)) {
     return {
       type: 'SWITCH_SERVICE',
       payload: {
