@@ -1,9 +1,15 @@
-import { Button, Form, Input } from 'antd'
+import { Button, Col, Form, Input, Row } from 'antd'
 import * as PropTypes from 'prop-types'
-import React from 'react'
+import React, { useRef } from 'react'
 import { formItemLayout } from '../layout'
 
 export default function ExternalChannelInput(props) {
+  const inputRef = useRef(null)
+
+  function handleSearch() {
+    props.onSearch(inputRef.current.state.value)
+  }
+
   return (
     <Form.Item
       {...formItemLayout}
@@ -12,19 +18,25 @@ export default function ExternalChannelInput(props) {
       validateStatus={props.channelField.status}
       help={props.channelField.error}
     >
-      <Input.Search
-        placeholder="Enter channel id from other device to connect"
-        onSearch={props.onSearch}
-        enterButton={
+      <Row gutter={8} type="flex" align="middle">
+        <Col span={22}>
+          <Input
+            ref={inputRef}
+            placeholder="Enter channel id from other device to connect"
+            onPressEnter={handleSearch}
+          />
+        </Col>
+        <Col span={2}>
           <Button
             htmlType="button"
             icon={props.icon}
             loading={props.channelLoading.get('status') === 'validating'}
             onMouseEnter={props.onMouseEnter}
             onMouseLeave={props.onMouseLeave}
+            onClick={handleSearch}
           />
-        }
-      />
+        </Col>
+      </Row>
     </Form.Item>
   )
 }
