@@ -2,6 +2,7 @@
 Demonstration app for realtime services (Ably, Pusher, PubNub)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/5f68b58e186c062c1d92/maintainability)](https://codeclimate.com/github/hckhanh/notesth/maintainability)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/hckhanh/notesth.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/hckhanh/notesth/context:javascript)
 
 In the project directory, you can run:
 
