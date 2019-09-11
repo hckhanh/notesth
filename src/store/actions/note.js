@@ -12,20 +12,14 @@ export function addNote(content) {
 
 export function deleteNote(id) {
   return function(dispatch) {
-    dispatch({
-      type: 'DELETE_NOTE_BROADCAST',
-      payload: { id }
-    })
+    dispatch({ type: 'DELETE_NOTE_BROADCAST', payload: { id } })
     dispatch({ type: 'DELETE_NOTE_VALIDATING', payload: { id } })
   }
 }
 
 export function updateNote(note) {
   return function(dispatch) {
-    dispatch({
-      type: 'UPDATE_NOTE_BROADCAST',
-      payload: note
-    })
+    dispatch({ type: 'UPDATE_NOTE_BROADCAST', payload: note })
     dispatch({ type: 'UPDATE_NOTE_VALIDATING', payload: { id: note.id } })
   }
 }
@@ -43,15 +37,12 @@ export function initNoteEvents() {
     })
 
     const noteActions = ['ADD_NOTE', 'DELETE_NOTE', 'UPDATE_NOTE']
-    for (const action of noteActions) {
+    noteActions.forEach((action) =>
       dataSource.subscribe(action, (data) => {
-        dispatch({
-          type: action,
-          payload: data
-        })
+        dispatch({ type: action, payload: data })
         dispatch({ type: 'SAVE_NOTES' })
         dispatch({ type: `${action}_SUCCESS` })
       })
-    }
+    )
   }
 }

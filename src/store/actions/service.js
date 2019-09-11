@@ -2,12 +2,7 @@ import services from '../../service/options'
 
 export function switchService(serviceKey) {
   if (Object.prototype.hasOwnProperty.call(services, serviceKey)) {
-    return {
-      type: 'SWITCH_SERVICE',
-      payload: {
-        serviceName: serviceKey
-      }
-    }
+    return { type: 'SWITCH_SERVICE', payload: { serviceName: serviceKey } }
   } else {
     console.warn(`Service has key ${serviceKey} is not available`)
   }
@@ -15,10 +10,7 @@ export function switchService(serviceKey) {
 
 export function connectChannel(channelId) {
   return function(dispatch) {
-    dispatch({
-      type: 'CONNECT_CHANNEL',
-      payload: { channelId }
-    })
+    dispatch({ type: 'CONNECT_CHANNEL', payload: { channelId } })
     dispatch({ type: 'CONNECT_CHANNEL_VALIDATING' })
   }
 }
