@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser')
 const csrf = require('csurf')
 const createError = require('http-errors')
 const auth = require('./api/auth')
+const { apiLimiter, indexLimiter } = require('./limits')
 
 const app = express()
 const buildFolderPath = path.resolve('build')
@@ -16,9 +17,9 @@ app.use(cookieParser())
 app.use(csrf({ cookie: true }))
 app.use(express.static(buildFolderPath))
 
-app.use('/auth', auth)
+app.use('/auth', apiLimiter, auth)
 
-app.all('*', function(req, res) {
+app.all('*', indexLimiter, function(req, res) {
   res.cookie('XSRF-TOKEN', req.csrfToken())
   res.sendFile(path.join(buildFolderPath, 'index.html'))
 })

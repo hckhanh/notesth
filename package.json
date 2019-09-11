@@ -36,6 +36,7 @@
     "csurf": "^1.10.0",
     "debug": "^4.1.1",
     "express": "^4.17.1",
+    "express-rate-limit": "^5.0.0",
     "http-errors": "^1.7.3",
     "immutable": "^4.0.0-rc.12",
     "logrocket": "^1.0.3",
