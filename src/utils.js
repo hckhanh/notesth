@@ -46,7 +46,7 @@ export function getDataSource(serviceName) {
 }
 
 const defaultLoadingState = Map({})
-export const createLoadingSelector = (actionType, ignoreService) => state => {
+export const createLoadingSelector = (actionType, ignoreService) => (state) => {
   if (ignoreService || (currentService && currentService.isGoAround())) {
     return state.loading.get(actionType, defaultLoadingState)
   }

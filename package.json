@@ -27,35 +27,38 @@
   "dependencies": {
     "@bugsnag/js": "^6.4.0",
     "@bugsnag/plugin-react": "^6.4.0",
-    "@craco/craco": "^5.3.0",
-    "ably": "^1.1.16",
-    "antd": "^3.22.0",
-    "babel-plugin-import": "^1.12.0",
+    "@craco/craco": "^5.4.0",
+    "ably": "^1.1.17",
+    "antd": "^3.23.2",
+    "babel-plugin-import": "^1.12.1",
     "cookie-parser": "^1.4.3",
     "craco-less": "^1.12.0",
     "debug": "^4.1.1",
     "express": "^4.17.1",
     "http-errors": "^1.7.3",
     "immutable": "^4.0.0-rc.12",
-    "logrocket": "^0.6.21",
+    "logrocket": "^1.0.3",
     "logrocket-react": "^3.0.1",
     "morgan": "^1.9.1",
     "nuclear-js": "^1.4.0",
     "prop-types": "^15.6.2",
-    "pubnub": "^4.25.1",
+    "pubnub": "^4.25.2",
     "pusher": "^2.2.2",
-    "pusher-js": "^5.0.0",
+    "pusher-js": "^5.0.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-redux": "^6.0.1",
+    "react-redux": "^7.1.1",
     "react-scripts": "3.1.1",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "uuid": "^3.3.3",
-    "webpack-bugsnag-plugins": "^1.4.1"
+    "webpack-bugsnag-plugins": "^1.4.2"
   },
   "devDependencies": {
     "concurrently": "^4.1.2",
-    "nodemon": "^1.19.1"
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "nodemon": "^1.19.2",
+    "prettier": "^1.18.2"
   }
 }
