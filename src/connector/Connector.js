@@ -17,7 +17,6 @@ class Connector extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      loading: false,
       channelField: {
         status: null,
         error: null
