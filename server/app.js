@@ -1,8 +1,9 @@
-const createError = require('http-errors')
 const express = require('express')
 const path = require('path')
-const cookieParser = require('cookie-parser')
 const logger = require('morgan')
+const cookieParser = require('cookie-parser')
+const csrf = require('csurf')
+const createError = require('http-errors')
 const auth = require('./api/auth')
 
 const app = express()
@@ -12,11 +13,13 @@ app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
+app.use(csrf({ cookie: true }))
 app.use(express.static(buildFolderPath))
 
 app.use('/auth', auth)
 
-app.get('/*', function(req, res) {
+app.all('*', function(req, res) {
+  res.cookie('XSRF-TOKEN', req.csrfToken())
   res.sendFile(path.join(buildFolderPath, 'index.html'))
 })
 
