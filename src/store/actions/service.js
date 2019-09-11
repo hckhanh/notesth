@@ -1,3 +1,4 @@
+import { batch } from 'react-redux'
 import services from '../../service/options'
 
 export function switchService(serviceKey) {
@@ -9,9 +10,11 @@ export function switchService(serviceKey) {
 }
 
 export function connectChannel(channelId) {
-  return function(dispatch) {
-    dispatch({ type: 'CONNECT_CHANNEL', payload: { channelId } })
-    dispatch({ type: 'CONNECT_CHANNEL_VALIDATING' })
+  return (dispatch) => {
+    batch(() => {
+      dispatch({ type: 'CONNECT_CHANNEL', payload: { channelId } })
+      dispatch({ type: 'CONNECT_CHANNEL_VALIDATING' })
+    })
   }
 }
 

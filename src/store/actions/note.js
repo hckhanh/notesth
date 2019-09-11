@@ -1,26 +1,33 @@
+import { batch } from 'react-redux'
 import { generateId, getDataSource } from '../../utils'
 
 export function addNote(content) {
   return function(dispatch) {
-    dispatch({
-      type: 'ADD_NOTE_BROADCAST',
-      payload: { id: generateId(), content }
+    batch(() => {
+      dispatch({
+        type: 'ADD_NOTE_BROADCAST',
+        payload: { id: generateId(), content }
+      })
+      dispatch({ type: 'ADD_NOTE_VALIDATING' })
     })
-    dispatch({ type: 'ADD_NOTE_VALIDATING' })
   }
 }
 
 export function deleteNote(id) {
   return function(dispatch) {
-    dispatch({ type: 'DELETE_NOTE_BROADCAST', payload: { id } })
-    dispatch({ type: 'DELETE_NOTE_VALIDATING', payload: { id } })
+    batch(() => {
+      dispatch({ type: 'DELETE_NOTE_BROADCAST', payload: { id } })
+      dispatch({ type: 'DELETE_NOTE_VALIDATING', payload: { id } })
+    })
   }
 }
 
 export function updateNote(note) {
   return function(dispatch) {
-    dispatch({ type: 'UPDATE_NOTE_BROADCAST', payload: note })
-    dispatch({ type: 'UPDATE_NOTE_VALIDATING', payload: { id: note.id } })
+    batch(() => {
+      dispatch({ type: 'UPDATE_NOTE_BROADCAST', payload: note })
+      dispatch({ type: 'UPDATE_NOTE_VALIDATING', payload: { id: note.id } })
+    })
   }
 }
 
@@ -39,9 +46,11 @@ export function initNoteEvents() {
     const noteActions = ['ADD_NOTE', 'DELETE_NOTE', 'UPDATE_NOTE']
     noteActions.forEach((action) =>
       dataSource.subscribe(action, (data) => {
-        dispatch({ type: action, payload: data })
-        dispatch({ type: 'SAVE_NOTES' })
-        dispatch({ type: `${action}_SUCCESS` })
+        batch(() => {
+          dispatch({ type: action, payload: data })
+          dispatch({ type: 'SAVE_NOTES' })
+          dispatch({ type: `${action}_SUCCESS` })
+        })
       })
     )
   }
