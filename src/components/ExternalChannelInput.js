@@ -1,7 +1,8 @@
-import { Button, Col, Form, Input, Row } from 'antd'
+import { Form } from 'antd'
 import * as PropTypes from 'prop-types'
 import React, { useRef } from 'react'
 import { formItemLayout } from '../layout'
+import ConnectInput from './ConnectInput'
 
 export default function ExternalChannelInput(props) {
   const inputRef = useRef(null)
@@ -18,24 +19,14 @@ export default function ExternalChannelInput(props) {
       help={props.channelField.error}
       hasFeedback
     >
-      <Row gutter={8} type="flex" align="middle">
-        <Col span={22}>
-          <Input
-            ref={inputRef}
-            placeholder="Enter channel id from other device to connect"
-            onPressEnter={handleSearch}
-          />
-        </Col>
-        <Col span={2}>
-          <Button
-            icon={props.icon}
-            loading={props.channelLoading.get('status') === 'validating'}
-            onMouseEnter={props.onMouseEnter}
-            onMouseLeave={props.onMouseLeave}
-            onClick={handleSearch}
-          />
-        </Col>
-      </Row>
+      <ConnectInput
+        ref={inputRef}
+        onPressEnter={handleSearch}
+        icon={props.icon}
+        channelLoading={props.channelLoading}
+        onMouseEnter={props.onMouseEnter}
+        onMouseLeave={props.onMouseLeave}
+      />
     </Form.Item>
   )
 }
