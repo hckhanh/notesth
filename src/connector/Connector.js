@@ -1,4 +1,4 @@
-import { Form } from 'antd'
+import { Divider, Form } from 'antd'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import CurrentChannelInput from '../components/CurrentChannelInput'
@@ -91,7 +91,7 @@ class Connector extends Component {
           value={this.props.channelId}
           onClick={this.clickToCopy}
         />
-
+        <Divider>Or</Divider>
         <ExternalChannelInput
           channelField={this.state.channelField}
           onSearch={this.toggleConnectionRealtime}

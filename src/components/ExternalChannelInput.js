@@ -14,9 +14,9 @@ export default function ExternalChannelInput(props) {
     <Form.Item
       {...formItemLayout}
       label="External Channel"
-      hasFeedback
       validateStatus={props.channelField.status}
       help={props.channelField.error}
+      hasFeedback
     >
       <Row gutter={8} type="flex" align="middle">
         <Col span={22}>
@@ -28,7 +28,6 @@ export default function ExternalChannelInput(props) {
         </Col>
         <Col span={2}>
           <Button
-            htmlType="button"
             icon={props.icon}
             loading={props.channelLoading.get('status') === 'validating'}
             onMouseEnter={props.onMouseEnter}
