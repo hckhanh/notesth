@@ -2,6 +2,7 @@
 Demonstration app for realtime services (Ably, Pusher, PubNub)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/5f68b58e186c062c1d92/maintainability)](https://codeclimate.com/github/hckhanh/notesth/maintainability)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fhckhanh%2Fnotesth.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fhckhanh%2Fnotesth?ref=badge_shield)
 
 In the project directory, you can run:
 
@@ -67,3 +68,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fhckhanh%2Fnotesth.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fhckhanh%2Fnotesth?ref=badge_large)
