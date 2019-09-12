@@ -7,47 +7,47 @@ export default class Service {
     this.goAround = true
   }
 
-  isGoAround = () => {
+  isGoAround() {
     return this.goAround
   }
 
-  initConnectionEvents = () => {
+  initConnectionEvents() {
     callNotImplemented()
   }
 
-  setChannel = (name) => {
+  setChannel(name) {
     callNotImplemented()
   }
 
-  subscribe = (eventName, callback) => {
+  subscribe(eventName, callback) {
     callNotImplemented()
   }
 
-  unsubscribe = () => {
+  unsubscribe() {
     callNotImplemented()
   }
 
-  addConnectionEvent = (eventName, callback) => {
+  addConnectionEvent(eventName, callback) {
     callNotImplemented()
   }
 
-  removeConnectionEvent = (eventName, callback) => {
+  removeConnectionEvent(eventName, callback) {
     callNotImplemented()
   }
 
-  addChannelSuccessEvent = (eventName, callback) => {
+  addChannelSuccessEvent(eventName, callback) {
     callNotImplemented()
   }
 
-  addChannelErrorEvent = (eventName, callback) => {
+  addChannelErrorEvent(eventName, callback) {
     callNotImplemented()
   }
 
-  publish = (eventName, data, callback) => {
+  publish(eventName, data, callback) {
     callNotImplemented()
   }
 
-  disconnect = () => {
+  disconnect() {
     callNotImplemented()
   }
 }

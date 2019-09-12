@@ -36,14 +36,18 @@ export default function(state = initState, action) {
   const dataSource = getDataSource()
 
   switch (action.type) {
-    case 'SWITCH_SERVICE':
+    case 'SWITCH_SERVICE': {
       return switchService(payload, state)
-    case 'CONNECT_CHANNEL':
+    }
+    case 'CONNECT_CHANNEL': {
       return switchChannel(dataSource, payload.channelId, state, false)
-    case 'DISCONNECT_CHANNEL':
+    }
+    case 'DISCONNECT_CHANNEL': {
       const newChannelId = generateId()
       return switchChannel(dataSource, newChannelId, state, true)
-    default:
+    }
+    default: {
       return state
+    }
   }
 }
