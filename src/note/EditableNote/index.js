@@ -111,7 +111,7 @@ class EditableNote extends Component {
         className="editable-note"
         actions={[<DeleteAction noteId={note.get('id')} />]}
       >
-        <span ref={this.wrapper}>
+        <span ref={this.wrapper} className="note-item">
           {!this.state.editing ? (
             <TextContent onClick={this.toggleEdit} note={note} />
           ) : (
