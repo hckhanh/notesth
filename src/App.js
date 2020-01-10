@@ -10,14 +10,14 @@ import { switchService } from './store/actions/service'
 import { getServiceName } from './store/selectors/service'
 
 function App({ serviceName, switchService, initNoteEvents }) {
-  const switchServiceEvents = (serviceKey) => {
+  const switchServiceEvents = useCallback((serviceKey) => {
     switchService(serviceKey)
     initNoteEvents()
-  }
+  })
 
   useEffect(() => {
     switchServiceEvents(serviceName)
-  }, [])
+  }, [serviceName, switchServiceEvents])
 
   return (
     <Layout className="app-layout">
@@ -31,7 +31,7 @@ function App({ serviceName, switchService, initNoteEvents }) {
   )
 }
 
-export default connect(
-  (state) => ({ serviceName: getServiceName(state) }),
-  { switchService, initNoteEvents }
-)(App)
+export default connect((state) => ({ serviceName: getServiceName(state) }), {
+  switchService,
+  initNoteEvents
+})(App)
